@@ -1,19 +1,22 @@
 const { Router } = require('express');
+const { spawn } = require('child_process');
+const { join } = require('path');
 
 const repoRouter = Router({ mergeParams: true });
-
 let repositoryId,
     repoPath,
-    reposPath,
     REPOS_PATH,
     MAIN_BRANCH,
-    getDefaultRepos;
+    getRepos,
+    execute;
+const getDefaultRepos = () => getRepos(REPOS_PATH);
 
-repoRouter.use((req, res, next) => {
+repoRouter.use(async (req, res, next) => {
   repositoryId = req.params.repositoryId;
   REPOS_PATH = req.data.REPOS_PATH;
   MAIN_BRANCH = req.data.MAIN_BRANCH;
-  getDefaultRepos = req.helpers.getDefaultRepos;
+  execute = req.helpers.execute;
+  getRepos = req.helpers.getRepos;
 
   const repos = await getDefaultRepos();
   if (!repos.find(repoId => repoId === repositoryId))
@@ -23,15 +26,20 @@ repoRouter.use((req, res, next) => {
 });
 
 repoRouter.get('/', (req, res) => {
-  // const repoPath = join(reposPath, repositoryId);
-  const { repoPath, MAIN_BRANCH } = req.data;
-
   execute('git', ['ls-tree', MAIN_BRANCH, '--name-only'], repoPath)
     .then(out => {
       const entries = out.trim().split('\n');
       res.json(entries);
     })
   ;
+});
+
+repoRouter.delete('/', (req, res) => {
+  const git = spawn('rm', ['-rf', repositoryId], { cwd: REPOS_PATH });
+
+  git.on('close', code => {
+    res.json({ message: 'Specified repository has been successfully removed' });
+  });
 });
 
 repoRouter.get('/tree', (req, res) => {
@@ -43,7 +51,7 @@ repoRouter.get('/tree', (req, res) => {
 });
 
 repoRouter.get('/tree/:commitHash', async (req, res) => {
-  const { repoPath } = req.data;
+  const { commitHash } = req.params;
 
   execute('git', ['ls-tree', commitHash, '--name-only'], repoPath)
     .then(out => {
@@ -54,7 +62,7 @@ repoRouter.get('/tree/:commitHash', async (req, res) => {
 });
 
 repoRouter.get('/tree/:commitHash/:path([^ ]+)', async (req, res) => {
-  const { repoPath } = req.data;
+  const { commitHash, path: pathRaw } = req.params;
   const path = pathRaw[pathRaw.length - 1] === '/' ? pathRaw : pathRaw + '/';
 
   execute('git', ['ls-tree', '--name-only', commitHash, path], repoPath)
@@ -72,8 +80,8 @@ repoRouter.get('/tree/:commitHash/:path([^ ]+)', async (req, res) => {
   ;
 });
 
-repoRouter.get('/blob/:commitHash/:pathToFile([^ ]+)', async (req, res) => {
-  const { repoPath } = req.data;
+repoRouter.get('/blob/:commitHash/:pathToFile([^ ]+)', (req, res) => {
+  const { commitHash, pathToFile } = req.params;
   const git = spawn('git', ['show', `${commitHash}:${pathToFile}`], { cwd: repoPath });
 
   git.stdout.on('data', data => {
@@ -84,16 +92,8 @@ repoRouter.get('/blob/:commitHash/:pathToFile([^ ]+)', async (req, res) => {
     res.json({ error: true, message: `Error occured in "${data}"` });
   });
 
-  git.on('close', code => {
-    res.status(code).end();
-  });
-});
-
-repoRouter.delete('/api/repos/:repositoryId', async (req, res) => {
-  const git = spawn('rm', ['-rf', repositoryId], { cwd: reposPath });
-
-  git.on('close', code => {
-    res.json({ message: 'Specified repository has been successfully removed' });
+  git.on('close', _ => {
+    res.end();
   });
 });
 

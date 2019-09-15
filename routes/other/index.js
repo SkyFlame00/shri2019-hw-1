@@ -1,23 +1,25 @@
 const { Router } = require('express');
+const { spawn } = require('child_process');
 
 const otherRouter = Router();
 
-app.get('/api/repos', async (_, res) => {
-  const { getDefaultRepos } = req.helpers;
+otherRouter.get('/api/repos', async (req, res) => {
+  const { getRepos } = req.helpers;
+  const { REPOS_PATH } = req.data;
 
-  getDefaultRepos()
-    .then(repos => res.status(500).json(repos))
-    .catch(error => res.status(404).json({ error: true, msg: error.message }))
+  getRepos(REPOS_PATH)
+    .then(repos => res.status(200).json(repos))
+    .catch(error => res.status(404).json({ error: true, message: error.message }))
   ;
 });
 
-app.post('/api/repos', (req, res) => {
-  const { reposPath } = req.data;
+otherRouter.post('/api/repos', (req, res) => {
+  const { REPOS_PATH } = req.data;
   const { url } = req.body;
-  const git = spawn('git', ['clone', url], { cwd: reposPath });
+  const git = spawn('git', ['clone', url], { cwd: REPOS_PATH });
   
   git.on('close', _ => {
-    res.status(500).json({
+    res.status(200).json({
       message: 'Specified repository has been successfully cloned'
     });
   });
