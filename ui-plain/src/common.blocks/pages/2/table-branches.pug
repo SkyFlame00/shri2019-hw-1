@@ -1,0 +1,23 @@
+include ../../patterns/table/table
+
+mixin tableBranches
+  - var iconBranch = '<i class="i i-branch i-branch_size_xs i-branch_color_primary"></i>'
+  +table(
+    'table-branches',
+    ['Name', 'Commit hash', ''],
+    [
+      [`${iconBranch}trunk`, '<a href="#">6748ds893432438dsd823329d923482d</a>'],
+      [`${iconBranch}users/a-aidyn00/my-feature-2`, '<a href="#">7748ds893432438dsd823329d923482d</a>'],
+      [`${iconBranch}users/a-aidyn00/my-feature-3`, '<a href="#">8748ds893432438dsd823329d923482d</a>'],
+      [`${iconBranch}users/a-aidyn00/my-feature-4`, '<a href="#">9748ds893432438dsd823329d923482d</a>'],
+      [`${iconBranch}users/a-aidyn00/my-feature-5`, '<a href="#">1748ds893432438dsd823329d923482d</a>'],
+      [`${iconBranch}users/a-aidyn00/my-feature-6`, '<a href="#">2748ds893432438dsd823329d923482d</a>'],
+      [`${iconBranch}users/a-aidyn00/my-feature-7`, '<a href="#">3748ds893432438dsd823329d923482d</a>'],
+      [`${iconBranch}users/a-aidyn00/my-feature-8`, '<a href="#">4748ds893432438dsd823329d923482d</a>'],
+      [`${iconBranch}users/a-aidyn00/my-feature-9`, '<a href="#">5748ds893432438dsd823329d923482d</a>'],
+      [`${iconBranch}users/a-aidyn00/my-feature-10`, '<a href="#">4548ds893432438dsd823329d923482d</a>'],
+      [`${iconBranch}users/a-aidyn00/my-feature-11`, '<a href="#">3248ds893432438dsd823329d923482d</a>'],
+      [`${iconBranch}users/a-aidyn00/my-feature-12`, '<a href="#">1348ds893432438dsd823329d923482d</a>'],
+      [`${iconBranch}users/a-aidyn00/my-feature-13`, '<a href="#">1348ds893432438dsd823329d923482d</a>']
+    ]
+  )

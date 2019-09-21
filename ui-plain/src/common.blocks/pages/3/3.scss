@@ -1,0 +1,66 @@
+.patch-page__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 16px;
+}
+
+.patch-page__title {
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.back-btn.patch-page__back-btn {
+  display: none;
+}
+
+.patch-page__commit-info {
+  font-size: 16px;
+
+  padding-top: 5px;
+  padding-bottom: 24px;
+}
+
+.patch-page__committer {
+  margin-left: 8px;
+}
+
+.patch__wrapper {
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 700px) {
+  .patch-page__top {
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .patch-page__top-right {
+    order: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    width: 100%;
+  }
+
+  .patch-page__top-left {
+    order: 2;
+    margin-top: 12px;
+  }
+
+  .back-btn.patch-page__back-btn {
+    display: flex;
+  }
+
+  .patch__wrapper {
+    margin-bottom: 0;
+  }
+
+  .patch {
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+  }
+}

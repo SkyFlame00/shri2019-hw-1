@@ -1,0 +1,33 @@
+extends ../../base/boilerplate/page
+include ../../content/header/header
+include ../../content/header-menu/header-menu
+include ../../content/footer/footer
+include ../../content/show-files/show-files
+include ../../content/back-btn/back-btn
+include patch-instance
+include ../../base/boilerplate/link-styles
+
+block styles
+  +linkStyles('../../../../dist/style.css')
+
+block body
+  .layout__wrapper
+    .layout__content
+      +header
+        +headerMenu
+      .layout.layout__container
+        .patch-page__top
+          .patch-page__top-left
+            .patch-page__title DEVTOOLS-4599: Add option to add extra whitespace between projects
+          .patch-page__top-right
+            +backBtn('patch-page__back-btn')
+            .patch-page__show-files-btn
+              +showFiles('r4318347')
+        .patch-page__commit-info
+          a.patch-page__hash-link(href='#') s324e8
+          span.patch-page__committer by #[a(href='#@') woodcutter], 4 s ago
+      .layout.layout__container.layout__code-preview
+        .patch__wrapper
+          +patchInstance
+    .layout__footer.layout_border_top
+      +footer

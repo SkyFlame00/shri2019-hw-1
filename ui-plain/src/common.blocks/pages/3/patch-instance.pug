@@ -1,0 +1,38 @@
+include ../../content/patch/patch
+
+mixin patchInstance
+  +patch({
+    lang: 'java',
+    lines: [
+      { state: 'same', code: 'package ru.yandex.devtools.intellij.arc.client;' },
+      { state: 'same', code: '' },
+      { state: 'added', code: '<span class="java__keyword">import</span> java.util.ArrayList;' },
+      { state: 'added', code: '<span class="java__keyword">import</span> java.util.Collection;' },
+      { state: 'added', code: '<span class="java__keyword">import</span> java.util.List;' },
+      { state: 'added', code: '' },
+      { state: 'same', code: '<span class="java__keyword">import</span> com.intellij.openapi.diagnostic.Logger;' },
+      { state: 'added', code: '<span class="java__keyword">import</span> com.intellij.openapi.project.Project;' },
+      { state: 'same', code: '<span class="java__keyword">import</span> com.intellij.openapi.vcs.FilePath;' },
+      { state: 'same', code: '<span class="java__keyword">import</span> com.intellij.openapi.vcs.VcsException;' },
+      { state: 'same', code: '<span class="java__keyword">import</span> com.intellij.openapi.vfs.VirtualFile;' },
+      { state: 'same', code: '<span class="java__keyword">import</span> com.intellij.vcsUtil.VcsUtil;' },
+      { state: 'added', code: '<span class="java__keyword">import</span> org.jetbrains.annotations.NotNull;' },
+      { state: 'added', code: '' },
+      { state: 'same', code: '<span class="java__keyword">import</span> ru.yandex.devtools.intellij.arc.ArcContext;' },
+      { state: 'same', code: '<span class="java__keyword">import</span> ru.yandex.devtools.intellij.arc.ArcRevisionNumber;' },
+      { state: 'same', code: '<span class="java__keyword">import</span> ru.yandex.devtools.intellij.arc.ArcStatus;' },
+      { state: 'added', code: '<span class="java__keyword">import</span> ru.yandex.devtools.intellij.arc.ui.ArcResetDialog;' },
+      { state: 'same', code: '' },
+      { state: 'removed', code: '<span class="java__keyword">import</span> java.util.ArrayList;' },
+      { state: 'removed', code: '<span class="java__keyword">import</span> java.util.Collection;' },
+      { state: 'removed', code: '<span class="java__keyword">import</span> java.util.List;' },
+      { state: 'removed', code: '' },
+      { state: 'same', code: '<span class="java__comment">/**</span>' },
+      { state: 'same', code: '<span class="java__comment"> * @author Dmitry Andreev <a href="mailto:AndreevDm@yandex-team.ru"></a></span>' },
+      { state: 'same', code: '<span class="java__comment"> * @date 11/10/2018</span>' },
+      { state: 'same', code: '<span class="java__comment">*/</span>' },
+      { state: 'same', code: ' <span class="java__keyword">public</span> <span class="java__funcName">ArcCli</span>(<span class="java__funcName">String</span> arcBinaryPath) {' },
+      { state: 'same', code: '        this.arcBinaryPath = arcBinaryPath;' },
+      { state: 'same', code: '    }' }
+    ]
+  })

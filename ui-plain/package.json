@@ -1,0 +1,24 @@
+{
+  "name": "pug-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/common.blocks/pages/index.pug",
+    "build": "npm run gulp && npm run parcel",
+    "gulp": "gulp build",
+    "parcel": "parcel build src/common.blocks/pages/index.pug"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cssnano": "^4.1.10",
+    "gulp-clean": "^0.4.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-flatten": "^0.4.0",
+    "gulp-sass": "^4.0.2",
+    "pug": "^2.0.4",
+    "gulp": "^4.0.2"
+  }
+}

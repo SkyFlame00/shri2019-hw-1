@@ -1,0 +1,36 @@
+include ../../content/details/details
+
+mixin detailsInstance
+  +details({
+    extIcon: '<i class="i i-file-code i-file-code_color_primary i-file-code_size_xs"></i>',
+    filename: 'ya.make',
+    bytes: '(4 347 bytes)',
+    lang: 'python',
+    lines: [
+      '<span class="python__comment">#!/usr/bin/env python</span>',
+      '<span class="python__keyword">import</span> os',
+      '<span class="python__keyword">import</span> sys',
+      '<span class="python__keyword">import</span> platform',
+      '<span class="python__keyword">import</span> json',
+      '',
+      `URLS = [<span class="python__string">'https://proxy.sandbox.yandex-team.ru/453818264'</span>, <span class="python__string">'http://storage-int.mds.yandex.net/get-sandbox/110738/by_platform.json.453815347'</span>]`,
+      `MD5 = <span class="python__string">'7f5a85f9c28d35c3a76d8cea7af51106'</span>`,
+      '',
+      'RETRIES = 5',
+      'HASH_PREFIX = 10',
+      '',
+      `HOME_DIR = os.path.expanduser(<span class="python__string">'~'</span>)`,
+      '',
+      '',
+      '<span class="python__keyword">def<span> <span class="python__funcName">create_dirs</span>(path):',
+      '    <span class="python__keyword">try</span>:',
+      '        os.makedirs(path)',
+      '    <span class="python__keyword">except</span> OSError <span class="python__keyword">as</span> e:',
+      '        <span class="python__keyword">import</span> errno',
+      '',
+      '        <span class="python__keyword">if</span> e.errno != errno.EEXIST:',
+      '            <span class="python__keyword">raise</span>',
+      '',
+      '    <span class="python__keyword">return</span> path'
+    ]
+  })

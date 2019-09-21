@@ -1,0 +1,24 @@
+include ../../patterns/table/table
+
+mixin tableFiles
+  - var iconFolder = '<i class="i i-folder i-folder_color_primary i-folder_size_xs"></i>';
+  - var iconFileCode = '<i class="i i-file-code i-file-code_color_primary i-file-code_size_xs"></i>';
+  - var iconFile = '<i class="i i-file i-file_color_primary i-file_size_xs"></i>';
+  +table(
+    'table-files',
+    ['Name', 'Last commit', 'Commit message', 'Committer', '', 'Updated', ''],
+    [
+      [`${iconFolder}api`, '<a href="#">d53dsv</a>', '[vcs] move http to arc', '<a href="#@">noxoomo</a>' , 'by Alexey Besedin, 4 s ago', '4 s ago'],
+      [`${iconFolder}ci`, '<a href="#">d53dsv</a>', '[vcs] test for empty commit message', '<a href="#@">nikitxskv</a>' , 'by Alexey Besedin, 4 s ago', '1 min ago'],
+      [`${iconFolder}contrib`, '<a href="#">s53dsv</a>', '[vcs] change owner to g:arc', '<a href="#@">nalpp</a>' , 'by Alexey Besedin, 4 s ago', '16:25'],
+      [`${iconFolder}http`, '<a href="#">h5jdsv</a>', '[vcs] move http to arc', '<a href="#@">somov</a>' , 'by Alexey Besedin, 4 s ago', 'Yesterday, 14:50'],
+      [`${iconFolder}lib`, '<a href="#">f5jdsv</a>', '<a href="#">ARCADIA-771</a>: append /trunk/arcadia/', '<a href="#@">deshevoy</a>' , 'by Alexey Besedin, 4 s ago', 'Jan 11, 12:01'],
+      [`${iconFolder}local`, '<a href="#">k5jdsv</a>', '<a href="#">ARCADIA-771</a>: detect binary files', '<a href="#@">exprmntr</a>' , 'by Alexey Besedin, 4 s ago', 'Jan 10, 12:01'],
+      [`${iconFolder}packages`, '<a href="#">a5jdsv</a>', '[vcs] <a href="#">VCS-803</a>: packages for services', '<a href="#@">levanov</a>' , 'by Alexey Besedin, 4 s ago', 'Jan 1, 12:01'],
+      [`${iconFolder}robots`, '<a href="#">l5jdsv</a>', '<a href="#">ARCADIA-771</a>: convert string to json object', '<a href="#@">torkve</a>' , 'by Alexey Besedin, 4 s ago', 'Dec 29, 2017'],
+      [`${iconFolder}server`, '<a href="#">j5jdsv</a>', '[vcs] get list of refs', '<a href="#@">spreis</a>' , 'by Alexey Besedin, 4 s ago', 'Dec 29, 2017'],
+      [`${iconFolder}ui`, '<a href="#">5jdsvk</a>', '[vsc] store merge conflicts', '<a href="#@">annaveronika</a>' , 'by Alexey Besedin, 4 s ago', 'Dec 29, 2017'],
+      [`${iconFileCode}README.md`, '<a href="#">h5jdsl</a>', '[vcs] add readme', '<a href="#@">pg</a>' , 'by Alexey Besedin, 4 s ago', 'Dec 29, 2017'],
+      [`${iconFile}ya.make`, '<a href="#">k5jdsv</a>', '[vcs] move http to arc', '<a href="#@">mvel</a>' , 'by Alexey Besedin, 4 s ago', 'Dec 29, 2017']
+    ]
+  )

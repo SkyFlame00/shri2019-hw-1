@@ -1,0 +1,33 @@
+extends ../../base/boilerplate/page
+include ../../content/header/header
+include ../../content/header-menu/header-menu
+include ../../content/page-title/page-title
+include ../../content/tabs/tabs
+include ../../content/footer/footer
+include history-instance
+include ../../base/boilerplate/link-styles
+
+block styles
+  +linkStyles('../../../../dist/style.css')
+
+block body
+  .layout__wrapper
+    .layout__content
+      +header
+        +headerMenu
+      .layout.layout__container
+        .breadcrumbs.breadcrumbs_border_bottom
+          a.breadcrumbs__item root
+          a.breadcrumbs__item trunk
+          a.breadcrumbs__item arcadia
+          a.breadcrumbs__item addapter
+          a.breadcrumbs__item.breadcrumbs__item_selected ya.make
+        +pageTitle('ya.make')
+        .last-commit-msg Last commit #[a(href='#') l32s23] on #[a(href='#') 20 Oct 2017, 12:24] by #[a(href='#@') robot-srch-releaser]
+        +tabs([
+          { title: 'Details', selected: false },
+          { title: 'History', selected: true }
+        ])
+        +historyInstance
+    .layout__footer.layout_border_top
+      +footer

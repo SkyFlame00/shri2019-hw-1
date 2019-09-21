@@ -1,0 +1,29 @@
+extends ../../base/boilerplate/page
+include ../../content/header/header
+include ../../content/header-menu/header-menu
+include ../../content/page-title/page-title
+include ../../content/tabs/tabs
+include table-files
+include ../../content/footer/footer
+include ../../base/boilerplate/link-styles
+
+block styles
+  +linkStyles('../../../../dist/style.css')
+
+block body
+  .layout__wrapper
+    .layout__content
+      +header
+        +headerMenu
+      .layout.layout__container
+        .breadcrumbs.breadcrumbs_border_bottom
+          a.breadcrumbs__item.breadcrumbs__item_selected arcadia
+        +pageTitle('arcadia')
+        .last-commit-msg Last commit #[a(href='#') c4d248] on #[a(href='#') 20 Oct 2017, 12:24] by #[a(href='#@') robot-srch-releaser]
+        +tabs([
+          { title: 'Files', selected: true },
+          { title: 'Branches', selected: false }
+        ])
+        +tableFiles
+    .layout__footer.layout_border_top
+      +footer
