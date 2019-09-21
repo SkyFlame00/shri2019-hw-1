@@ -2,6 +2,7 @@
 
 Сборка и запуск сервера:
 ```sh
+npm i
 npm run build
 npm run start
 ```
