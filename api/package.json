@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "debug-server": "node --no-lazy --inspect-brk index \"/Users/user\"",
-    "server": "node index \"/Users/user/\""
+    "debug-server": "node --no-lazy --inspect-brk index",
+    "server": "node index"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1"
   }
 }
