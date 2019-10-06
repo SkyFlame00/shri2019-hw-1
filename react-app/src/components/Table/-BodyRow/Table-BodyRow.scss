@@ -1,0 +1,7 @@
+.Table-BodyRow {
+  border-bottom: 1px solid var(--border-color-secondary);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}

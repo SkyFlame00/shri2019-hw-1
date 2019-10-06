@@ -1,0 +1,47 @@
+.IconArrow::after {
+  content: '\e902';
+}
+
+.IconArrow_color_primary {
+  color: var(--color-primary);
+}
+
+.IconArrow_color_secondary {
+  color: var(--color-secondary);
+}
+
+.IconArrow_color_ghost {
+  color: var(--color-ghost);
+}
+
+.IconArrow_color_light {
+  color: #E5E5E5;
+}
+
+.IconArrow_size_xs {
+  font-size: 12px;
+  line-height: 13px;
+}
+
+.IconArrow_size_s {
+  font-size: 13px;
+  line-height: 13px;
+}
+
+.IconArrow_size_m {
+  font-size: 14px;
+  line-height: 28px;
+}
+
+.IconArrow_size_l {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.IconArrow_point_right {
+  transform: rotate(-90deg);
+}
+
+.i-arrow_point_left {
+  transform: rotate(90deg);
+}

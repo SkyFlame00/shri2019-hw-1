@@ -1,0 +1,11 @@
+.IconFile::after {
+  content: '\e907';
+}
+
+.IconFile_color_primary {
+  color: var(--color-primary);
+}
+
+.IconFile_size_xs {
+  font-size: 12px;
+}

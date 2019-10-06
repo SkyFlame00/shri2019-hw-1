@@ -1,0 +1,11 @@
+.IconFolder::after {
+  content: '\e908';
+}
+
+.IconFolder_color_primary {
+  color: var(--color-primary);
+}
+
+.IconFolder_size_xs {
+  font-size: 12px;
+}

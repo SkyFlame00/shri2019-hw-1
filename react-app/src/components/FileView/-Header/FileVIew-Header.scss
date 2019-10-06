@@ -1,0 +1,13 @@
+.FileView-Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 42px;
+  padding: 0 16px 0;
+  
+  background-color: #F5F5F5;
+
+  border: 1px solid var(--border-color-primary);
+  border-radius: 3px 3px 0 0;
+}

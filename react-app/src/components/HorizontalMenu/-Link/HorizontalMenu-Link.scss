@@ -1,0 +1,11 @@
+.HorizontalMenu-Link {
+  display: flex;
+  align-items: center;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: .2s linear;
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}

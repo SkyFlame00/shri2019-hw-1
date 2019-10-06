@@ -11,6 +11,17 @@ let repositoryId,
     execute;
 const getDefaultRepos = () => getRepos(REPOS_PATH);
 
+const processFilesString = out => {
+  return out.split('\n')
+    .filter(str => str && str.length > 0)
+    .map(str => str.split('\t'))
+    .map(([str, path]) => {
+      const pathArr = path.split('/');
+      return [str.split(' ')[1], pathArr[pathArr.length - 1]];
+    })
+    .map(([type, fileName]) => ({ isDir: type === 'tree', fileName }));
+}
+
 repoRouter.use(async (req, res, next) => {
   repositoryId = req.params.repositoryId;
   REPOS_PATH = req.data.REPOS_PATH;
@@ -26,9 +37,9 @@ repoRouter.use(async (req, res, next) => {
 });
 
 repoRouter.get('/', (req, res) => {
-  execute('git', ['ls-tree', MAIN_BRANCH, '--name-only'], repoPath)
+  execute('git', ['ls-tree', MAIN_BRANCH, '--full-name'], repoPath)
     .then(out => {
-      const entries = out.trim().split('\n');
+      let entries = processFilesString(out);
       res.json(entries);
     })
   ;
@@ -53,9 +64,9 @@ repoRouter.get('/tree', (req, res) => {
 repoRouter.get('/tree/:commitHash', async (req, res) => {
   const { commitHash } = req.params;
 
-  execute('git', ['ls-tree', commitHash, '--name-only'], repoPath)
+  execute('git', ['ls-tree', commitHash, '--full-name'], repoPath)
     .then(out => {
-      const entries = out.trim().split('\n');
+      let entries = processFilesString(out);
       res.json(entries);
     })
   ;
@@ -65,16 +76,9 @@ repoRouter.get('/tree/:commitHash/:path([^ ]+)', async (req, res) => {
   const { commitHash, path: pathRaw } = req.params;
   const path = pathRaw[pathRaw.length - 1] === '/' ? pathRaw : pathRaw + '/';
 
-  execute('git', ['ls-tree', '--name-only', commitHash, path], repoPath)
+  execute('git', ['ls-tree', '--full-name', commitHash, path], repoPath)
     .then(out => {
-      const entries = out.trim()
-        .split('\n')
-        .map(path => {
-          const entities = path.split('/');
-          return entities[entities.length - 1];
-        })
-      ;
-
+      let entries = processFilesString(out);
       return res.json(entries);
     })
   ;

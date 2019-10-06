@@ -8,7 +8,7 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
-console.log(process.argv[2])
+
 mountRoutes(
   app,
   {

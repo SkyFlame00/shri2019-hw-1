@@ -1,0 +1,12 @@
+.Breadcrumbs-Link {
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+  color: var(--color-secondary);
+
+  &::after {
+    margin: 0 10px; 
+    content: '/';
+    display: inline-block;
+  }
+}

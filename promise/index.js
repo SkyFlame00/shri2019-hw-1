@@ -1,6 +1,10 @@
 ;(function(global) {
   global.Promise = QPromise;
 
+  function isFunction(arg) {
+    return typeof arg === 'function';
+  }
+
   var STATES = {
     PENDING: 'pending',
     FULFILLED: 'fulfilled',
@@ -67,18 +71,37 @@
       case STATES.FULFILLED:
         return new QPromise(function(resolve, reject) {
           try {
-            self.value instanceof QPromise
-              ? self.value.then(function(value) { resolve(onFulfilled(value)); })
-              : resolve(onFulfilled(self.value));
+            // self.value instanceof QPromise
+            //   ? self.value.then(function(value) { resolve(onFulfilled(value)); })
+            //   : resolve(onFulfilled(self.value));
+            if (self.value instanceof QPromise) {
+              isFunction(onFulfilled)
+                ? self.value.then(function(value) { resolve(onFulfilled(value)); })
+                : self.value.then(function(value) { resolve(value); });
+            }
+            else {
+              isFunction(onFulfilled)
+                ? resolve(onFulfilled(self.value))
+                : resolve(onFulfilled);
+            }
           }
           catch(e) {
             reject(e)
           }
         });
       case STATES.REJECTED:
-        return new QPromise(function(_, reject) {
-          if (!onRejected) { reject(self.error); }
-          else reject(onRejected(self.error));
+        return new QPromise(function(resolve, reject) {
+          if (!onRejected) { resolve(self.error); }
+          else resolve(onRejected(self.error));
+
+          // try {
+          //   self.error instanceof QPromise
+          //     ? self.error.then(function(error) { resolve(onRejected(error)); })
+          //     : resolve(onRejected(self.error));
+          // }
+          // catch(e) {
+          //   reject(e)
+          // }
         });
     }
   }

@@ -1,0 +1,11 @@
+$breakpoint-s: 360px;
+$breakpoint-m: 700px;
+$breakpoint-l: 1000px;
+$breakpoint-xl: 1440px;
+
+.Theme_size_default {
+  font-size: 14px;
+  line-height: 20px;
+
+  --desktop-block-max-width: 1376px;
+}

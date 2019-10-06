@@ -1,0 +1,23 @@
+.IconFileCode::after {
+  content: '\e906';
+}
+
+.IconFileCode_color_primary {
+  color: var(--text-primary);
+}
+
+.IconFileCode_color_ghost {
+  color: var(--text-ghost);
+}
+
+.IconFileCode_size_xs {
+  font-size: 12px;
+}
+
+.IconFileCode_size_s {
+  font-size: 13px;
+}
+
+.IconFileCode_size_m {
+  font-size: 14px;
+}
