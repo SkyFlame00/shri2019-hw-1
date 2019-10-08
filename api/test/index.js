@@ -2,6 +2,8 @@ const chai = require('chai');
 const request = require('supertest');
 const axios = require('axios');
 const AdmZip = require('adm-zip');
+const rimraf = require('rimraf');
+
 const expect = chai.expect;
 
 const createAppInstance = require('../app');
@@ -34,11 +36,16 @@ describe('API methods', function() {
   before(function() {
     serverInstance = createServerInstance(app, './test/repos', 9001);
     serverInstance2 = createServerInstance(app2, './test/SURELY-DOES-NOT-EXIST', 9002);
+    const zip = new AdmZip('test/repos.zip');
+    zip.extractAllTo('test/', true);
   });
 
   after(function() {
     serverInstance.close();
     serverInstance2.close();
+    rimraf('test/repos', err => {
+      if (err) throw new Error(err.message);
+    });
   });
 
   context('GET /api/repos', function() {
