@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { spawn } = require('child_process');
 const { join } = require('path');
+const rimraf = require('rimraf');
 
 const repoRouter = Router({ mergeParams: true });
 let repositoryId,
@@ -8,7 +9,9 @@ let repositoryId,
     REPOS_PATH,
     MAIN_BRANCH,
     getRepos,
-    execute;
+    execute,
+    handleError;
+
 const getDefaultRepos = () => getRepos(REPOS_PATH);
 
 const processFilesString = out => {
@@ -28,37 +31,43 @@ repoRouter.use(async (req, res, next) => {
   MAIN_BRANCH = req.data.MAIN_BRANCH;
   execute = req.helpers.execute;
   getRepos = req.helpers.getRepos;
+  handleError = req.helpers.handleError;
 
-  const repos = await getDefaultRepos();
+  let repos;
+
+  try {
+    repos = await getDefaultRepos();
+  } catch(e) {
+    return handleError(res)(e);
+  }
+  
   if (!repos.find(repoId => repoId === repositoryId))
-    return res.status(404).json({ error: true, code: 'REPOSITORY_NOT_EXIST' });
+    return handleError(res, 'Specified repository does not exist in this directory')();
   repoPath = join(REPOS_PATH, repositoryId);
   next();
 });
 
-repoRouter.get('/', (req, res) => {
+repoRouter.get('/', (_, res) => {
   execute('git', ['ls-tree', MAIN_BRANCH, '--full-name'], repoPath)
     .then(out => {
-      let entries = processFilesString(out);
-      res.json(entries);
+      const entries = processFilesString(out);
+      return res.status(200).json(entries);
     })
-  ;
+    .catch(handleError(res));
 });
 
-repoRouter.delete('/', (req, res) => {
-  const git = spawn('rm', ['-rf', repositoryId], { cwd: REPOS_PATH });
+repoRouter.delete('/', (_, res) => {
+  rimraf(`${REPOS_PATH}/${repositoryId}`, err => {
+    if (err) {
+      return handleError(res)(err);
+    }
 
-  git.on('close', code => {
-    res.json({ message: 'Specified repository has been successfully removed' });
+    return res.status(200).end();
   });
 });
 
-repoRouter.get('/tree', (req, res) => {
-  res.json({
-    error: true,
-    code: 'REPO_CONTENT_BRANCH_NOT_PROVIDED',
-    message: 'You did not provide the branch name'
-  });
+repoRouter.get('/tree', (_, res) => {
+  return handleError(res, 'You did not provide the branch name')();
 });
 
 repoRouter.get('/tree/:commitHash', async (req, res) => {
@@ -66,38 +75,75 @@ repoRouter.get('/tree/:commitHash', async (req, res) => {
 
   execute('git', ['ls-tree', commitHash, '--full-name'], repoPath)
     .then(out => {
-      let entries = processFilesString(out);
-      res.json(entries);
+      const entries = processFilesString(out);
+      return res.status(200).json(entries);
     })
-  ;
+    .catch(handleError(res));
 });
 
 repoRouter.get('/tree/:commitHash/:path([^ ]+)', async (req, res) => {
   const { commitHash, path: pathRaw } = req.params;
   const path = pathRaw[pathRaw.length - 1] === '/' ? pathRaw : pathRaw + '/';
 
-  execute('git', ['ls-tree', '--full-name', commitHash, path], repoPath)
+  execute('git', ['ls-tree', '--full-name', `${commitHash}:${path}`], repoPath)
     .then(out => {
-      let entries = processFilesString(out);
-      return res.json(entries);
+      const entries = processFilesString(out);
+      return res.status(200).json(entries);
     })
-  ;
+    .catch(handleError(res));
 });
 
 repoRouter.get('/blob/:commitHash/:pathToFile([^ ]+)', (req, res) => {
   const { commitHash, pathToFile } = req.params;
   const git = spawn('git', ['show', `${commitHash}:${pathToFile}`], { cwd: repoPath });
 
+  let error = false;
+  let errorData;
+
   git.stdout.on('data', data => {
     res.write(data);
   });
 
   git.stderr.on('data', data => {
-    res.json({ error: true, message: `Error occured in "${data}"` });
+    error = true;
+    errorData = data;
   });
 
   git.on('close', _ => {
-    res.end();
+    if (error) {
+      handleError(res, errorData.toString())();
+      error = false;
+      return;  
+    };
+
+    res.status(200).end();
+  });
+});
+
+repoRouter.get('/commits/:commitHash/diff', async (req, res) => {
+  const { commitHash } = req.params;
+  const git = spawn('git', ['show', commitHash, `--format=%B`, '--'], { cwd: repoPath });
+
+  let error = false;
+  let errorData;
+
+  git.stdout.on('data', data => {
+    res.write(data);
+  });
+
+  git.stderr.on('data', data => {
+    error = true;
+    errorData = data;
+  });
+
+  git.on('close', _ => {
+    if (error) {
+      handleError(res, errorData.toString())();
+      error = false;
+      return;  
+    };
+
+    res.status(200).end();
   });
 });
 

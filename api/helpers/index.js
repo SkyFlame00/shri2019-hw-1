@@ -26,8 +26,29 @@ const execute = (program, args, cwd) => {
   });
 };
 
+const handleError = (res, message) => {
+  return err => {
+    if (!message) {
+      switch(err.code) {
+        case 'ENOENT':
+          message = 'Provided directory does not exist';
+          break;
+        default:
+          message = err.message;
+          break;
+      }
+    }
+
+    return res.status(404).json({
+      error: true,
+      message
+    });
+  }
+}
+
 module.exports = {
   isRepo,
   getRepos,
-  execute
+  execute,
+  handleError
 };
