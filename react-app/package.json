@@ -7,10 +7,13 @@
     "dev": "webpack-dev-server",
     "build": "webpack",
     "build-watch": "webpack --watch",
-    "start": "node server"
+    "start": "node server",
+    "init-hermione-custom-commands": "cd './tests/hermione-custom-commands/' && npm link",
+    "install-hermione-custom-commands-pkg": "npm link hermione-custom-commands",
+    "init": "npm run init-hermione-custom-commands && npm run install-hermione-custom-commands-pkg"
   },
   "keywords": [],
-  "author": "",
+  "author": "Anton Tikhonov",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
@@ -26,6 +29,8 @@
     "@svgr/webpack": "^4.3.3",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
+    "hermione": "^2.12.6",
+    "html-reporter": "^5.0.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",

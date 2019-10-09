@@ -1,8 +1,9 @@
 const express = require('express');
 const fs = require('fs');
 
+const { port } = require('./config');
+
 const app = express();
-const port = 9000;
 
 app.use(express.static('./dist'));
 

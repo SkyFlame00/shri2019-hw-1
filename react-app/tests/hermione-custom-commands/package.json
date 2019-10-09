@@ -1,0 +1,9 @@
+{
+  "name": "hermione-custom-commands",
+  "version": "1.0.0",
+  "description": "Some custom commands to Hermione",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Anton Tikhonov",
+  "license": "ISC"
+}

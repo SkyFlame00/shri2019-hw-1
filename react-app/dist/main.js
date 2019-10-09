@@ -626,7 +626,7 @@ eval("exports = module.exports = __webpack_require__(/*! ../../../../node_module
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \".Layout-Block {\\n  max-width: var(--desktop-block-max-width);\\n  padding: 0 16px;\\n  box-sizing: border-box; }\\n\", \"\"]);\n\n\n//# sourceURL=webpack:///./src/components/Layout/-Block/Layout-Block.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+eval("exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \".Layout-Block {\\n  max-width: var(--desktop-block-max-width);\\n  padding: 0 16px;\\n  margin: 0 auto;\\n  box-sizing: border-box; }\\n\", \"\"]);\n\n\n//# sourceURL=webpack:///./src/components/Layout/-Block/Layout-Block.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
 
 /***/ }),
 
