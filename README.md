@@ -1,3 +1,7 @@
 # Проект ШРИ 2019 (первый этап)
 - [Домашнее задание по NodeJS](https://github.com/SkyFlame00/shri2019-hw-project/tree/master/api)
 - [Домашнее задание по адаптивной верстке](https://github.com/SkyFlame00/shri2019-hw-project/tree/master/ui-plain)
+- [Домашнее задание по JS](https://github.com/SkyFlame00/shri2019-hw-project/tree/master/promise)
+- [Домашнее задание по React](https://github.com/SkyFlame00/shri2019-hw-project/tree/master/react-app)
+- [Домашнее задание по модульным тестам](https://github.com/SkyFlame00/shri2019-hw-project/tree/master/api/test)
+- [Домашнее задание по интеграционным тестам](https://github.com/SkyFlame00/shri2019-hw-project/tree/master/react-app/tests)
