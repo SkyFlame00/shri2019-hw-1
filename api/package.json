@@ -6,7 +6,8 @@
   "scripts": {
     "debug-server": "node --no-lazy --inspect-brk index",
     "server": "node index",
-    "test": "mocha ./test/index.js"
+    "test": "mocha ./test/index.js",
+    "ts": "npx ts-node index.ts"
   },
   "keywords": [],
   "author": "",
@@ -18,10 +19,23 @@
     "rimraf": "^3.0.0"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.17.1",
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.1",
+    "@types/node": "^12.7.12",
+    "@types/rimraf": "^2.0.2",
+    "@typescript-eslint/eslint-plugin": "^2.3.3",
+    "@typescript-eslint/parser": "^2.3.3",
     "adm-zip": "^0.4.13",
     "axios": "^0.19.0",
     "chai": "^4.2.0",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "mocha": "^6.2.1",
-    "supertest": "^4.0.2"
+    "prettier": "^1.18.2",
+    "supertest": "^4.0.2",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.4"
   }
 }

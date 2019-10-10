@@ -1,16 +1,15 @@
-const { Router } = require('express');
-const { spawn } = require('child_process');
+import { Router } from 'express';
+import { spawn } from 'child_process';
 
 const otherRouter = Router();
 
-otherRouter.get('/api/repos', async (req, res) => {
+otherRouter.get('/api/repos', (req, res) => {
   const { getRepos, handleError } = req.helpers;
-  const { REPOS_PATH } = req.data;
+  const REPOS_PATH = req.data && req.data.REPOS_PATH;
 
   getRepos(REPOS_PATH)
-    .then(repos => res.status(200).json(repos))
-    .catch(handleError(res))
-  ;
+    .then((repos: string[]) => res.status(200).json(repos))
+    .catch(handleError(res));
 });
 
 otherRouter.post('/api/repos', (req, res) => {
@@ -20,13 +19,10 @@ otherRouter.post('/api/repos', (req, res) => {
   const git = spawn('git', ['clone', url], { cwd: REPOS_PATH });
 
   let error = false;
-  let errorData;
+  let errorData: string | undefined;
 
   git.stderr.on('data', dataRaw => {
-    const reArr = [
-      /Cloning into/,
-      /done/
-    ];
+    const reArr = [/Cloning into/, /done/];
     const data = dataRaw.toString().trim();
 
     if (!reArr.some(re => re.test(data))) {
@@ -35,15 +31,15 @@ otherRouter.post('/api/repos', (req, res) => {
     }
   });
 
-  git.on('close', _ => {
+  git.on('close', () => {
     if (error) {
       handleError(res, errorData)();
       error = false;
-      return;  
-    };
+      return;
+    }
 
     res.status(200).end();
   });
 });
 
-module.exports = otherRouter;
+export default otherRouter;
