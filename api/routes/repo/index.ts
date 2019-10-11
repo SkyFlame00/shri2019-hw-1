@@ -27,7 +27,7 @@ const processFilesString = (out: string): Entry[] => {
       const pathArr = path.split('/');
       return [str.split(' ')[1], pathArr[pathArr.length - 1]];
     })
-    .map(([type, fileName]) => ({
+    .map(([type, fileName]): Entry => ({
       isDir: type === 'tree',
       fileName
     }));

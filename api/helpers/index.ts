@@ -26,15 +26,15 @@ export function execute(program: string, args: string[], cwd: string): Promise<s
   });
 }
 
-export function handleError(res: Response, message: string) {
-  return (err: Error & ArcanumAPI.ErrorWithCode) => {
+export function handleError(res: Response, message?: string) {
+  return (err?: Error & ArcanumAPI.ErrorWithCode): Response => {
     if (!message) {
-      switch(err.code) {
+      switch(err && err.code) {
         case 'ENOENT':
           message = 'Provided directory does not exist';
           break;
         default:
-          message = err.message;
+          message = (err && err.message) || '';
           break;
       }
     }
@@ -44,6 +44,6 @@ export function handleError(res: Response, message: string) {
       message
     };
 
-    res.status(404).json(errorToClient);
+    return res.status(404).json(errorToClient);
   }
 }
