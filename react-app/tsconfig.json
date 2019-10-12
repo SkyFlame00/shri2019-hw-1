@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "jsx": "react",
+    "strict": true,
+    "noImplicitAny": true,
+    "baseUrl": "./src",
+    "esModuleInterop": true,
+    "rootDir": ".",
+    "typeRoots": [
+      "@types",
+      "./src/types"
+    ],
+    "allowSyntheticDefaultImports": true
+  }
+}

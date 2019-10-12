@@ -1,15 +1,16 @@
 const { join, resolve } = require("path");
+const { CheckerPlugin } = require('awesome-typescript-loader')
 
 module.exports = {
-  entry: "./src/index.js",
-  mode: "development",
+  entry: './src/index.tsx',
+  mode: 'development',
   output: {
     path: __dirname + '/dist',
-    filename: "main.js",
+    filename: 'main.js',
     publicPath: '/'
   },
   devServer: {
-    contentBase: join(__dirname, "dist"),
+    contentBase: join(__dirname, 'dist'),
     compress: true,
     port: 9000,
     watchContentBase: true,
@@ -21,7 +22,13 @@ module.exports = {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: {
-          loader: "babel-loader"
+          loader: 'babel-loader'
+        }
+      },
+      {
+        test: /\.tsx?$/,
+        use: {
+          loader: 'ts-loader'
         }
       },
       {
@@ -47,6 +54,11 @@ module.exports = {
     ]
   },
   resolve: {
-    modules: [ resolve('src'), resolve('node_modules') ]
-  }
+    modules: [resolve('src'), resolve('node_modules')],
+    extensions: ['.ts', '.tsx', '.js', '.jsx']
+  },
+  plugins: [
+    new CheckerPlugin()
+  ],
+  devtool: 'source-map',
 };
