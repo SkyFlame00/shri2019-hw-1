@@ -1,4 +1,6 @@
 # Миграция API-сервера и React-приложения на Typescript
+Необходимо склонировать этот монорепозиторий. API-сервер находится в папке [`/api`](https://github.com/SkyFlame00/shri2019-hw-project/tree/master/api), React-приложение в - [`/react-app`](https://github.com/SkyFlame00/shri2019-hw-project/tree/master/react-app).
+
 Тесты на Typescript, к сожалению, не переводил из-за нехватки времени.
 
 ## Трудоемкость
