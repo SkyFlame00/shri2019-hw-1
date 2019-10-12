@@ -10,7 +10,13 @@ import './_isShown/DropdownMenu_isShown_no.scss';
 import './-Ul/DropdownMenu-Ul.scss';
 import './-Loading/DropdownMenu-Loading.scss';
 
-export default class DropdownMenu extends Component {
+export interface DropdownMenuProps {
+  items: string[] | undefined;
+  isLoading: boolean;
+  isShown: boolean;
+}
+
+export default class DropdownMenu extends Component<DropdownMenuProps> {
   render() {
     const { items, isLoading, isShown } = this.props;
     const cnDropdownMenu = cn('DropdownMenu')({

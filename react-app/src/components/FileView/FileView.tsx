@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { RouteComponentProps } from 'react-router';
 import { cn } from '@bem-react/classname';
 
 import Icon from 'components/Icons/Icon/Icon';
@@ -18,21 +19,29 @@ import './-Header/FileView-Header.scss';
 import './-Icon/FileView-Icon.scss';
 import './-Wrapper/FileView-Wrapper.scss';
 
-export default class FileView extends Component {
-  constructor(props) {
+interface State {
+  commitHash: string | undefined;
+  repoId: string | undefined;
+  path: string | undefined;
+  isFileDownloaded: boolean;
+  file: string | undefined;
+}
+
+export default class FileView extends Component<RouteComponentProps, State> {
+  constructor(props: RouteComponentProps) {
     super(props);
 
     const {
       repoId,
       commitHash,
       path
-    } = (this.props.match && this.props.match.params) || {};
+    }: ArcanumReact.MatchParams = (this.props.match && this.props.match.params) || {};
 
     this.requestFiles(`repos/${repoId}/blob/${commitHash}/${path}`);
 
     this.state = {
-      isFilesDownloaded: false,
-      files: undefined,
+      isFileDownloaded: false,
+      file: undefined,
       repoId,
       commitHash,
       path
@@ -50,7 +59,7 @@ export default class FileView extends Component {
       repoId,
       commitHash,
       path
-    } = (this.props.match && this.props.match.params) || {};
+    }: ArcanumReact.MatchParams = (this.props.match && this.props.match.params) || {};
 
     if (prevRepoId === repoId &&
         prevCommitHash === commitHash &&
@@ -62,7 +71,7 @@ export default class FileView extends Component {
     this.requestFiles(`repos/${repoId}/blob/${commitHash}/${path}`);
     this.setState({
       isFileDownloaded: false,
-      files: undefined,
+      file: undefined,
       repoId,
       commitHash,
       path
@@ -77,7 +86,7 @@ export default class FileView extends Component {
     this.checkUpdate();
   }
 
-  requestFiles(apiPath) {
+  requestFiles(apiPath: string) {
     fetch(`${url}/api/${apiPath}`).then(res => res.text())
       .then(file => {
         this.setState({ isFileDownloaded: true, file });
@@ -93,8 +102,8 @@ export default class FileView extends Component {
       path,
     } = this.state;
     const cnFV = cn('FileView');
-    const pathArr = path.split('/')
-    const fileName = pathArr[pathArr.length - 1];
+    const pathArr = path && path.split('/')
+    const fileName = (pathArr && pathArr[pathArr.length - 1]) || '';
     
     return (
       <>

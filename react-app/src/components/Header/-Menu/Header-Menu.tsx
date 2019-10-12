@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 
-import HorizontalMenu from '../../HorizontalMenu/HorizontalMenu';
+import HorizontalMenu, { HorizontalMenuItem } from '../../HorizontalMenu/HorizontalMenu';
 
-export default class HeaderMenu extends Component {
-  constructor(props) {
-    super(props);
-  }
+export interface HeaderMenuProps {
+  isReposReceived: boolean;
+  repos: string[] | undefined;
+}
 
+export default class HeaderMenu extends Component<HeaderMenuProps> {
   render() {
     const { isReposReceived, repos } = this.props;
-    const items = [
+    const items: HorizontalMenuItem[] = [
       {
         title: 'Repository Arc',
         hasDropdown: true,
@@ -24,7 +25,7 @@ export default class HeaderMenu extends Component {
       <div>
         <HorizontalMenu
           items={items}
-          isLoading={isReposReceived}
+          isLoading={!isReposReceived}
           height='large'
           iconMargin='m'
         />

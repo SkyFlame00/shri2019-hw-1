@@ -12,23 +12,39 @@ import '../-Text/_height/HorizontalMenu-Text_height_large.scss';
 import '../-Link/_height/HorizontalMenu-Link_height_large.scss';
 import '../-Text/_isActive/HorizontalMenu-Text_isActive.scss';
 
-const highlightFirstWord = string => {
-  const stringArr = string.split(' ');
+export interface HorizontalMenuItemProps {
+  hasDropdown: boolean;
+  title: string;
+  isLoading: boolean;
+  items: string[] | undefined;
+  height: string;
+  iconMargin: string;
+  isFirstWordHighlighted: boolean;
+  isActive: boolean;
+  idx: number;
+}
+
+interface State {
+  isDropdownShown: boolean;
+}
+
+const highlightFirstWord = (str: string): JSX.Element[] => {
+  const stringArr = str.split(' ');
   return [
     <b>{stringArr[0]}</b>,
     <span>{' ' + stringArr.slice(1).join(' ')}</span>
   ];
 }
 
-export default class HorizontalMenuItem extends Component {
-  constructor(props) {
+export default class HorizontalMenuItem extends Component<HorizontalMenuItemProps, State> {
+  constructor(props: HorizontalMenuItemProps) {
     super(props);
     this.state = {
       isDropdownShown: false
     };
   }
 
-  onClick(e) {
+  onClick(e: React.MouseEvent<HTMLElement>) {
     e.preventDefault();
     this.setState({
       isDropdownShown: !this.state.isDropdownShown
@@ -37,7 +53,6 @@ export default class HorizontalMenuItem extends Component {
 
   render() {
     const {
-      isAsync,
       hasDropdown,
       title,
       isLoading,
@@ -76,8 +91,6 @@ export default class HorizontalMenuItem extends Component {
         </a>
         { hasDropdown &&
           <DropdownMenu
-            isAsync={isAsync}
-            // src={src}
             isLoading={isLoading}
             items={items}
             isShown={this.state.isDropdownShown}

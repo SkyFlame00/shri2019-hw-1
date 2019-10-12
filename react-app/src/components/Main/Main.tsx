@@ -1,27 +1,24 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import RootPage from 'components/RootPage/RootPage';
 import Spinner from 'components/Spinner/Spinner';
 import RepositoryView from 'components/RepositoryView/RepositoryView';
 import FileView from 'components/FileView/FileView';
 import NotFoundView from 'components/NotFoundView/NotFoundView';
 
-export default class Main extends Component {
-  constructor(props) {
-    super(props);
-  }
+export interface MainProps {
+  isReposReceived: boolean;
+  repos: string[] | undefined;
+}
 
+export default class Main extends Component<MainProps> {
   render() {
     const { isReposReceived, repos } = this.props;
 
     return (
       <Switch>
-        <Route exact path='/'>
-          {isReposReceived ?
-            <RepositoryView repoId={repos[0]} /> :
-            <Spinner />
-          }
-        </Route>
+        <Route exact path='/' component={RootPage(isReposReceived, repos && repos[0])} />
         <Route exact path='/repos'></Route>
         <Route exact path='/repos/:repoId' component={RepositoryView} />
         <Route exact path='/repos/:repoId/tree'></Route>

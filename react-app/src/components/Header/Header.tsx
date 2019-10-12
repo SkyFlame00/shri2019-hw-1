@@ -6,7 +6,12 @@ import HeaderMenu from './-Menu/Header-Menu';
 
 import './Header.scss';
 
-export default class Header extends Component {
+export interface HeaderProps {
+  isReposReceived: boolean;
+  repos: string[] | undefined;
+}
+
+export default class Header extends Component<HeaderProps> {
   render() {
     const { isReposReceived, repos } = this.props;
     const cnHeader = cn('Header');

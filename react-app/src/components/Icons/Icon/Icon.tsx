@@ -8,11 +8,11 @@ import '../IconFolder/IconFolder.scss';
 import '../IconFileCode/IconFileCode.scss';
 import '../IconDownload/IconDownload.scss';
 
-const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+const capitalizeFirstLetter = (str: string): string => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-const getIconBlockName = id => {
+const getIconBlockName = (id: string): string | null => {
   const ids = [
     'arrow',
     'file',
@@ -28,11 +28,15 @@ const getIconBlockName = id => {
     null;
 }
 
-export default class Icon extends Component {
-  constructor(props) {
-    super(props);
-  }
+export interface IconProps {
+  id: string;
+  position?: string;
+  size?: string;
+  color?: string;
+  className?: string;
+}
 
+export default class Icon extends Component<IconProps> {
   render() {
     const { id, position, size, color, className } = this.props;
     const blockName = getIconBlockName(id);

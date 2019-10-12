@@ -5,11 +5,11 @@ import { NavLink } from 'react-router-dom';
 import './DropdownMenu-Item.scss';
 import '../-Link/DropdownMenu-Link.scss';
 
-export default class DropdownMenuItem extends Component {
-  constructor(props) {
-    super(props);
-  }
+export interface DropdownMenuItemProps {
+  title: string;
+}
 
+export default class DropdownMenuItem extends Component<DropdownMenuItemProps> {
   render() {
     const { title } = this.props;
     const cnDDMenu = cn('DropdownMenu');

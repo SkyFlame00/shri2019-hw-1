@@ -8,7 +8,11 @@ import './-Title/RepositoryHeader-Title.scss';
 import './-Trunk/RepositoryHeader-Trunk.scss';
 import './-TrunkIcon/RepositoryHeader-TrunkIcon.scss';
 
-export default class RepositoryHeader extends Component {
+interface RepositoryHeaderProps {
+  repoId: string | undefined;
+}
+
+export default class RepositoryHeader extends Component<RepositoryHeaderProps> {
   render() {
     const { repoId } = this.props;
     const cnRH = cn('RepositoryHeader');

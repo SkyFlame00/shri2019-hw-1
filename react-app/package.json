@@ -28,6 +28,9 @@
     "@babel/preset-react": "^7.0.0",
     "@bem-react/classname": "^1.5.6",
     "@svgr/webpack": "^4.3.3",
+    "@types/react": "^16.9.5",
+    "@types/react-dom": "^16.9.1",
+    "@types/react-router-dom": "^5.1.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
     "hermione": "^2.12.6",
@@ -35,6 +38,8 @@
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
+    "ts-loader": "^6.2.0",
+    "typescript": "^3.6.4",
     "url-loader": "^2.1.0",
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9"

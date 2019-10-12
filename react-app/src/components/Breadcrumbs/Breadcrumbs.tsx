@@ -6,7 +6,16 @@ import './Breadcrumbs.scss';
 import './-CurrentLocation/Breadcrumbs-CurrentLocation.scss';
 import './-Link/Breadcrumbs-Link.scss';
 
-export default class RepositoryBreadcrumbs extends Component {
+export interface BreadcrumbsItem {
+  title: string;
+  to?: string;
+}
+
+export interface BreadcrumbsProps {
+  items: BreadcrumbsItem[]
+}
+
+export default class RepositoryBreadcrumbs extends Component<BreadcrumbsProps> {
   render() {
     const { items } = this.props;
     const linksArr = items.slice(0, items.length - 1);
@@ -15,7 +24,7 @@ export default class RepositoryBreadcrumbs extends Component {
 
     return (
       <div className={cnBC()}>
-        {linksArr.map((link, idx) =>
+        {linksArr.map((link: any, idx: number) =>
           <NavLink
             to={link.to}
             className={cnBC('Link')}
