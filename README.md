@@ -5,3 +5,4 @@
 - [Домашнее задание по React](https://github.com/SkyFlame00/shri2019-hw-project/tree/master/react-app)
 - [Домашнее задание по модульным тестам](https://github.com/SkyFlame00/shri2019-hw-project/tree/master/api/test)
 - [Домашнее задание по интеграционным тестам](https://github.com/SkyFlame00/shri2019-hw-project/tree/master/react-app/tests)
+- [Continuous Integration](https://github.com/SkyFlame00/shri2019-hw-project/tree/master/ci)
